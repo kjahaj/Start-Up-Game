@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     private Animator anim;
@@ -12,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private float moveSpeed = 7f;
     [SerializeField]private float jumpForce = 14f;
     [SerializeField] private LayerMask jumpableGround;
-
+    [SerializeField] private AudioSource jumpSoundEffect;
+    
     private enum MovementState {idle, running, jumping, falling };
 
 
@@ -34,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            jumpSoundEffect.Play();
             rb.velocity = new Vector3(rb.velocity.x,jumpForce,0);
         }
 
